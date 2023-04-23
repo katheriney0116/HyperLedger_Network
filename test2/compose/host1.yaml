@@ -1,0 +1,125 @@
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+version: '2'
+
+volumes:
+  orderer.microconnect.com:
+  ordererA.microconnect.com:
+  peer0.macaoE.microconnect.com:
+  peer1.macaoE.microconnect.com:
+
+networks:
+  test:
+    external:
+      name: first-network
+
+services:
+
+  couchdb.macaoE.microconnect.com:
+    container_name: couchdb.macaoE.microconnect.com
+    extends:
+      file: docker-base.yaml
+      service: couchdb-base
+    ports:
+      - 7255:5984
+    networks:
+      - test
+
+
+  orderer.microconnect.com:
+    extends:
+      file: net-compose.yaml
+      service: orderer.microconnect.com
+    container_name: orderer.microconnect.com
+    networks:
+      - test
+    extra_hosts:
+      - "orderer.microconnect.com:10.10.10.124"
+      - "ordererB.microconnect.com:10.10.10.123"
+      - "ordererA.microconnect.com:10.10.10.124"
+    ports:
+      - 8052:8052
+      - 8053:8053
+      - 9445:9445
+
+  ordererA.microconnect.com:
+    extends:
+      file: docker-base.yaml
+      service: orderer-base
+    container_name: ordererA.microconnect.com
+    environment:
+      - ORDERER_GENERAL_LISTENPORT=7052
+      - ORDERER_ADMIN_LISTENADDRESS=0.0.0.0:7053
+      - ORDERER_OPERATIONS_LISTENADDRESS=0.0.0.0:9446
+    networks:
+      - test
+    extra_hosts:
+      - "orderer.microconnect.com:10.10.10.124"
+      - "ordererB.microconnect.com:10.10.10.123"
+      - "ordererA.microconnect.com:10.10.10.124"
+    volumes:
+        - ../orgs/ordererorgs/microconnect.com/orderers/ordererA.microconnect.com:/tmp/hyperledger/orderer
+        - ordererA.microconnect.com:/var/hyperledger/production/orderer
+    ports:
+      - 7052:7052
+      - 7053:7053
+      - 9446:9446
+  
+  peer0.macaoE.microconnect.com:
+    container_name: peer0.macaoE.microconnect.com
+    extends:
+      file: net-compose.yaml
+      service: peer0.macaoE.microconnect.com
+    environment:
+      - CORE_PEER_PROFILE_ENABLED=false
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.macaoE.microconnect.com:5984  # 必须为容器内端口
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=admin
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=adminpw
+    networks:
+      - test
+    extra_hosts:
+      - "orderer.microconnect.com:10.10.10.124"
+      - "ordererB.microconnect.com:10.10.10.123"
+      - "ordererA.microconnect.com:10.10.10.124"
+    volumes:
+        - /var/run:/host/var/run
+        - ../config:/tmp/hyperledger/peercfg
+        - ../orgs/peerOrganizations/macaoE.microconnect.com/peers/peer0.macaoE.microconnect.com:/tmp/hyperledger/fabric/peer
+        - peer0.macaoE.microconnect.com:/var/hyperledger/production
+    ports:
+      - 8054:8054
+      - 8056:8056
+    depends_on:
+      - couchdb.macaoE.microconnect.com
+      
+  peer1.macaoE.microconnect.com:
+    container_name: peer1.macaoE.microconnect.com
+    extends:
+      file: net-compose.yaml
+      service: peer1.macaoE.microconnect.com
+    networks:
+      - test
+    environment:
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.macaoE.microconnect.com:5984  # 必须为容器内端口
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=admin
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=adminpw
+    volumes:
+        - /var/run:/host/var/run
+        - ../config:/tmp/hyperledger/peercfg
+        - ../orgs/peerOrganizations/macaoE.microconnect.com/peers/peer1.macaoE.microconnect.com:/tmp/hyperledger/fabric/peer
+        - peer1.macaoE.microconnect.com:/var/hyperledger/production
+    ports:
+      - 8057:8057
+      - 8059:8059
+    depends_on:
+      - couchdb.macaoE.microconnect.com
+    extra_hosts:
+      - "orderer.microconnect.com:10.10.10.124"
+      - "ordererB.microconnect.com:10.10.10.123"
+      - "ordererA.microconnect.com:10.10.10.124"
+

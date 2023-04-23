@@ -1,0 +1,38 @@
+
+export FABRIC_CFG_PATH=/root/test2/config
+export CORE_PEER_TLS_ENABLED=true
+export CORE_PEER_LOCALMSPID="macaoEMSP"
+export PEER0_macaoE_CA=/root/test2/orgs/peerOrganizations/macaoE.microconnect.com/tlsca/tlsca.macaoE.microconnect.com-cert.pem
+export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_macaoE_CA
+export CORE_PEER_ADDRESS=localhost:8054
+
+export CORE_PEER_MSPCONFIGPATH=/root/test2/orgs/peerOrganizations/macaoE.microconnect.com/users/Admin@macaoE.microconnect.com/msp
+
+
+
+export FABRIC_CFG_PATH=/root/test2/config
+export CORE_PEER_TLS_ENABLED=true
+export CORE_PEER_LOCALMSPID="macaoEMSP"
+export PEER1_macaoE_CA=/root/test2/orgs/peerOrganizations/macaoE.microconnect.com/tlsca/tlsca.macaoE.microconnect.com-cert.pem
+export CORE_PEER_TLS_ROOTCERT_FILE=$PEER1_macaoE_CA
+export CORE_PEER_ADDRESS=localhost:8057
+
+export CORE_PEER_MSPCONFIGPATH=/root/test2/orgs/peerOrganizations/macaoE.microconnect.com/users/Admin@macaoE.microconnect.com/msp
+peer chaincode invoke -o localhost:7051 --tls --cafile $ORDERER_CA --channelID channel3 --name contract_2 --peerAddresses localhost:8057 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE -c '{"Args":["GetAllProjects"]}'
+
+export FABRIC_CFG_PATH=/root/test2/config
+export CORE_PEER_TLS_ENABLED=true
+export CORE_PEER_LOCALMSPID="spvMSP"
+export PEER0_spv_CA=/root/test2/orgs/peerOrganizations/spv.microconnect.com/tlsca/tlsca.spv.microconnect.com-cert.pem
+export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_spv_CA
+export CORE_PEER_ADDRESS=localhost:8055
+
+export CORE_PEER_MSPCONFIGPATH=/root/test2/orgs/peerOrganizations/spv.microconnect.com/users/Admin@spv.microconnect.com/msp
+
+
+peer lifecycle chaincode approveformyorg -o orderer.microconnect.com:8052 --tls --cafile $ORDERER_CA  --channelID channel3 --name contract_2 --version 3.0 --sequence 4 --waitForEvent --package-id $PACKAGE_ID
+
+
+//例子
+peer lifecycle chaincode commit -o orderer.microconnect.com:8052 --tls --cafile $ORDERER_CA --channelID channel3 --name contract_2 --version 3.0 --sequence 4 --peerAddresses peer0.macaoE.microconnect.com:8054 --tlsRootCertFiles $PEER0_macaoE_CA --peerAddresses peer0.spv.microconnect.com:8055 --tlsRootCertFiles $PEER0_spv_CA 
+peer chaincode invoke -o orderer.microconnect.com:8052 --tls --cafile $ORDERER_CA --channelID channel3 --name contract_2 --peerAddresses peer0.macaoE.microconnect.com:8054 --tlsRootCertFiles $PEER0_macaoE_CA --peerAddresses peer0.spv.microconnect.com:8055 --tlsRootCertFiles $PEER0_spv_CA -c '{"Args":["ProjectContract:SelectALL"]}'

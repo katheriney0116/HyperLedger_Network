@@ -1,0 +1,131 @@
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+version: '2'
+
+volumes:
+  orderer.microconnect.com:
+  peer0.macaoE.microconnect.com:
+  peer1.macaoE.microconnect.com:
+  peer0.spv.microconnect.com:
+
+services:
+
+  orderer.microconnect.com:
+    container_name: orderer.microconnect.com
+    extends:
+      file: docker-base.yaml
+      service: orderer-base
+    environment:
+      - ORDERER_GENERAL_LISTENPORT=8052
+      - ORDERER_ADMIN_LISTENADDRESS=0.0.0.0:8053
+      - ORDERER_OPERATIONS_LISTENADDRESS=0.0.0.0:9445
+    working_dir: /root
+    command: orderer
+    volumes:
+        - ../orgs/ordererorgs/microconnect.com/orderers/orderer.microconnect.com:/tmp/hyperledger/orderer
+        - orderer.microconnect.com:/var/hyperledger/production/orderer
+    ports:
+      - 8052:8052
+      - 8053:8053
+      - 9445:9445
+
+
+  peer0.macaoE.microconnect.com:
+    container_name: peer0.macaoE.microconnect.com
+    extends:
+      file: docker-base.yaml
+      service: peer-base
+    environment:
+      #- FABRIC_LOGGING_SPEC=DEBUG
+      
+      # Peer specific variables
+      - CORE_PEER_ID=peer0.macaoE.microconnect.com
+      - CORE_PEER_ADDRESS=peer0.macaoE.microconnect.com:8054
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:8054
+      - CORE_PEER_CHAINCODEADDRESS=peer0.macaoE.microconnect.com:8055
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:8055
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.macaoE.microconnect.com:8054
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.macaoE.microconnect.com:8054
+      - CORE_PEER_LOCALMSPID=macaoEMSP
+      - CORE_OPERATIONS_LISTENADDRESS=peer0.macaoE.microconnect.com:8056
+      - CHAINCODE_AS_A_SERVICE_BUILDER_CONFIG={"peername":"peer0macaoE"}
+    volumes:
+        - /var/run:/host/var/run
+        - ../config:/tmp/hyperledger/peercfg
+        - ../orgs/peerOrganizations/macaoE.microconnect.com/peers/peer0.macaoE.microconnect.com:/tmp/hyperledger/fabric/peer
+        - peer0.macaoE.microconnect.com:/var/hyperledger/production
+    working_dir: /root
+    command: peer node start
+    ports:
+      - 8054:8054
+      - 8056:8056
+    
+  
+  peer1.macaoE.microconnect.com:
+    container_name: peer1.macaoE.microconnect.com
+    extends:
+      file: docker-base.yaml
+      service: peer-base
+    environment:
+      #- FABRIC_LOGGING_SPEC=DEBUG
+      # Peer specific variables
+      - CORE_PEER_ID=peer1.macaoE.microconnect.com
+      - CORE_PEER_ADDRESS=peer1.macaoE.microconnect.com:8057
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:8057
+      - CORE_PEER_CHAINCODEADDRESS=peer1.macaoE.microconnect.com:8058
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:8058
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.macaoE.microconnect.com:8057
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.macaoE.microconnect.com:8057
+      - CORE_PEER_LOCALMSPID=macaoEMSP
+      - CORE_OPERATIONS_LISTENADDRESS=peer1.macaoE.microconnect.com:8059
+      - CHAINCODE_AS_A_SERVICE_BUILDER_CONFIG={"peername":"peer1macaoE"}
+    volumes:
+        - /var/run:/host/var/run
+        - ../config:/tmp/hyperledger/peercfg
+        - ../orgs/peerOrganizations/macaoE.microconnect.com/peers/peer1.macaoE.microconnect.com:/tmp/hyperledger/fabric/peer
+        - peer1.macaoE.microconnect.com:/var/hyperledger/production
+    working_dir: /root
+    command: peer node start
+    ports:
+      - 8057:8057
+      - 8059:8059
+    
+    
+  peer0.spv.microconnect.com:
+    container_name: peer0.spv.microconnect.com
+    image: hyperledger/fabric-peer:2.4
+    extends:
+      file: docker-base.yaml
+      service: peer-base
+    environment:
+      # Peer specific tmpiables
+      - CORE_PEER_ID=peer0.spv.microconnect.com
+      - CORE_PEER_ADDRESS=peer0.spv.microconnect.com:8055
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:8055
+      - CORE_PEER_CHAINCODEADDRESS=peer0.spv.microconnect.com:8052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:8052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.spv.microconnect.com:8055
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.spv.microconnect.com:8055
+      - CORE_PEER_LOCALMSPID=spvMSP   
+      - CORE_OPERATIONS_LISTENADDRESS=peer0.spv.microconnect.com:9450
+      - CHAINCODE_AS_A_SERVICE_BUILDER_CONFIG={"peername":"peer0spv"}
+    volumes:
+        - /var/run:/host/var/run
+        - ../config:/tmp/hyperledger/peercfg
+        - ../orgs/peerOrganizations/spv.microconnect.com/peers/peer0.spv.microconnect.com:/tmp/hyperledger/fabric/peer
+        - peer0.spv.microconnect.com:/var/hyperledger/production
+    working_dir: /root
+    command: peer node start
+    ports:
+      - 8055:8055
+      - 9450:9450
+    
+
+  
+
+
+
+  

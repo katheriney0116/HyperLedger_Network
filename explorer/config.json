@@ -1,0 +1,9 @@
+{
+	"network-configs": {
+		"test-network": {
+			"name": "Test Network",
+			"profile": "/opt/explorer/app/platform/fabric/connection-profile/macaoe.json"
+		}
+	},
+	"license": "Apache-2.0"
+}

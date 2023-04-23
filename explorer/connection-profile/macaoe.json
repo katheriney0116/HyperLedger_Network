@@ -1,0 +1,58 @@
+{
+	"name": "test-network",
+	"version": "1.0.0",
+	"license": "Apache-2.0",
+	"client": {
+		"tlsEnable": true,
+		"adminCredential": {
+			"id": "exploreradmin",
+			"password": "exploreradminpw"
+		},
+		"enableAuthentication": true,
+		"organization": "macaoEMSP",
+		"connection": {
+			"timeout": {
+				"peer": {
+					"endorser": "300"
+				},
+				"orderer": "300"
+			}
+		}
+	},
+	"channels": {
+		"channel3": {
+			"peers": {
+				"peer0.macaoE.microconnect.com": {}
+			},
+			"connection": {
+				"timeout": {
+					"peer": {
+						"endorser": "6000",
+						"eventHub": "6000",
+						"eventReg": "6000"
+					}
+				}
+			}
+		}
+	},
+	"organizations": {
+		"macaoEMSP": {
+			"mspid": "macaoEMSP",
+			"adminPrivateKey": {
+				"path": "/tmp/crypto/peerOrganizations/macaoE.microconnect.com/users/Admin@macaoE.microconnect.com/msp/keystore/44bb873e901497f3db88726937b28b3eb63b705b414be662b1cdbefb8d47fdda_sk"
+			},
+			"peers": ["peer0.macaoE.microconnect.com"],
+			"signedCert": {
+				"path": "/tmp/crypto/peerOrganizations/macaoE.microconnect.com/users/Admin@macaoE.microconnect.com/msp/signcerts/cert.pem"
+			}
+		}
+	},
+	"peers": {
+		"peer0.macaoE.microconnect.com": {
+			"tlsCACerts": {
+				"path": "/tmp/crypto/peerOrganizations/macaoE.microconnect.com/peers/peer0.macaoE.microconnect.com/tls/ca.crt"
+			},
+			"url": "grpcs://peer0.macaoE.microconnect.com:8054"
+		}
+	}
+}

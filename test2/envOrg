@@ -1,0 +1,10 @@
+
+export ORDERER_CA=/root/test2/orgs/ordererorgs/microconnect.com/tlsca/tlsca.microconnect.com-cert.pem
+export ORDERER_ADMIN_TLS_SIGN_CERT=/root/test2/orgs/ordererorgs/microconnect.com/orderers/ordererB.microconnect.com/tls/server.crt
+export ORDERER_ADMIN_TLS_PRIVATE_KEY=/root/test2/orgs/ordererorgs/microconnect.com/orderers/ordererB.microconnect.com/tls/server.key
+
+
+export ORDERER_CA=/root/test2/orgs/ordererorgs/microconnect.com/tlsca/tlsca.microconnect.com-cert.pem
+export ORDERER_ADMIN_TLS_SIGN_CERT=/root/test2/orgs/ordererorgs/microconnect.com/orderers/ordererA.microconnect.com/tls/server.crt
+export ORDERER_ADMIN_TLS_PRIVATE_KEY=/root/test2/orgs/ordererorgs/microconnect.com/orderers/ordererA.microconnect.com/tls/server.key
+osnadmin channel join --channelID channel3 --config-block ./channel-artifacts/genesis.block -o localhost:8053 --ca-file "$ORDERER_CA" --client-cert "$ORDERER_ADMIN_TLS_SIGN_CERT" --client-key "$ORDERER_ADMIN_TLS_PRIVATE_KEY"

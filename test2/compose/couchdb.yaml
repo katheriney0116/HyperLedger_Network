@@ -1,0 +1,35 @@
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+version: '2'
+
+volumes:
+  orderer.microconnect.com:
+  ordererA.microconnect.com:
+  peer0.macaoE.microconnect.com:
+  peer1.macaoE.microconnect.com:
+
+networks:
+  test:
+    external:
+      name: first-network
+
+services:
+  couchdb.macaoE.microconnect.com:
+    container_name: couchdb.macaoE.microconnect.com
+    extends:
+      file: docker-base.yaml
+      service: couchdb-base
+    ports:
+      - 7255:5984
+
+  couchdb.spv.microconnect.com:
+      container_name: couchdb.spv.microconnect.com
+      extends:
+        file: docker-base.yaml
+        service: couchdb-base
+      ports:
+        - 7355:5984
+

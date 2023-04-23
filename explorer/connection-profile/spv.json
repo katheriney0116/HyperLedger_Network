@@ -1,0 +1,48 @@
+{
+	"name": "spv-network",
+	"version": "1.0.0",
+	"client": {
+		"tlsEnable": true,
+		"adminCredential": {
+			"id": "exploreradmin",
+			"password": "exploreradminpw"
+		},
+		"enableAuthentication": true,
+		"organization": "spvMSP",
+		"connection": {
+			"timeout": {
+				"peer": {
+					"endorser": "300"
+				},
+				"orderer": "300"
+			}
+		}
+	},
+	"channels": {
+		"mychannel": {
+			"peers": {
+				"peer0.spv.microconnect.com": {}
+			}
+		}
+	},
+	"organizations": {
+		"spvMSP": {
+			"mspid": "spvMSP",
+			"adminPrivateKey": {
+				"path": "/tmp/crypto/peerOrganizations/spv.microconnect.com/users/Admin@spv.microconnect.com/msp/keystore/9300b6f8a778a2adaa407bdc3c6244dffc81c0adbfe875c43909c4b964beea97_sk"
+			},
+			"peers": ["peer0.spv.microconnect.com"],
+			"signedCert": {
+				"path": "/tmp/crypto/peerOrganizations/spv.microconnect.com/users/User1@spv.microconnect.com/msp/signcerts/cert.pem"
+			}
+		}
+	},
+	"peers": {
+		"peer0.spv.microconnect.com": {
+			"tlsCACerts": {
+				"path": "/tmp/crypto/peerOrganizations/spv.microconnect.com/peers/peer0.spv.microconnect.com/tls/ca.crt"
+			},
+			"url": "grpcs://peer0.spv.microconnect.com:8055"
+		}
+	}
+}
