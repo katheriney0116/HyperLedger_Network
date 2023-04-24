@@ -20,7 +20,7 @@
 | peer0.spv.microconnect.com | 10.10.10.124| **8055(peer_address)** 8052(chaincode) 9450(operation) |spv组织的一个peer节点 |
 
 ## 启动Fabric-CA服务
-[Fabric-CA介绍](https://github.com/katheriney0116/HyperLedger_Network/blob/main/test2/Fabric-CA.md)
+[Fabric-CA介绍](https://github.com/katheriney0116/HyperLedger_Network/blob/main/test2/documents/Fabric-CA.md)
 
 在此文章里，我们用123虚拟机生成所有证书文件
 
