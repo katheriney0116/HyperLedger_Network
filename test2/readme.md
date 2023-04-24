@@ -20,11 +20,42 @@
 | peer0.spv.microconnect.com | 10.10.10.124| **8055(peer_address)** 8052(chaincode) 9450(operation) |spv组织的一个peer节点 |
 
 ## 启动Fabric-CA服务
+
+因为要通过124虚拟机生成所有证书文件，我们需要将本地DNS指向124
+```bash
+echo "127.0.0.1       macaoE.microconnect.com" >> /etc/hosts
+echo "127.0.0.1       spv.microconnect.com" >> /etc/hosts
+echo "127.0.0.1       microconnect.com" >> /etc/hosts
+
+echo "127.0.0.1       orderer.microconnect.com" >> /etc/hosts
+echo "127.0.0.1       ordererA.microconnect.com" >> /etc/hosts
+echo "127.0.0.1       ordererB.microconnect.com" >> /etc/hosts
+
+echo "127.0.0.1       peer1.macaoE.microconnect.com" >> /etc/hosts
+echo "127.0.0.1       peer0.macaoE.microconnect.com" >> /etc/hosts
+echo "127.0.0.1       peer0.spv.microconnect.com" >> /etc/hosts
+```
 [Fabric-CA介绍](https://github.com/katheriney0116/HyperLedger_Network/blob/main/test2/documents/Fabric-CA.md)
 
-在此文章里，我们用123虚拟机生成所有证书文件
+在此文章里，我们用124虚拟机生成所有证书文件
 
 然后使用`docker stop $(docker ps -aq)`关掉CA服务容器
+
+将需要部署在123的节点证书copy到123虚拟机里，并将两边的dns文件都改成
+
+```bash
+echo "10.10.10.124       macaoE.microconnect.com" >> /etc/hosts
+echo "10.10.10.123       spv.microconnect.com" >> /etc/hosts
+echo "10.10.10.124       microconnect.com" >> /etc/hosts
+
+echo "10.10.10.124       orderer.microconnect.com" >> /etc/hosts
+echo "10.10.10.124       ordererA.microconnect.com" >> /etc/hosts
+echo "10.10.10.123       ordererB.microconnect.com" >> /etc/hosts
+
+echo "10.10.10.124       peer1.macaoE.microconnect.com" >> /etc/hosts
+echo "10.10.10.124       peer0.macaoE.microconnect.com" >> /etc/hosts
+echo "10.10.10.123       peer0.spv.microconnect.com" >> /etc/hosts
+```
 
 ## 部署节点
 
@@ -59,5 +90,6 @@ Fabric节点在启动时会通过几种方式加载变量获取配置信息
 - [安装链码到指定通道](https://github.com/katheriney0116/HyperLedger_Network/blob/main/test2/documents/InstallChaincode.md)
 - [更新链码步骤](https://github.com/katheriney0116/HyperLedger_Network/blob/main/test2/documents/UpdateChaincode.md)
 
-##works cited
+## works cited
+
 https://github.com/wefantasy/FabricLearn
