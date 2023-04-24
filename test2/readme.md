@@ -57,4 +57,4 @@ Fabric节点在启动时会通过几种方式加载变量获取配置信息
 ## 链码（智能合约）
 
 - [安装链码到指定通道](https://github.com/katheriney0116/HyperLedger_Network/blob/main/test2/documents/InstallChaincode.md)
-- [更新链码步骤]
+- [更新链码步骤](https://github.com/katheriney0116/HyperLedger_Network/blob/main/test2/documents/UpdateChaincode.md)
