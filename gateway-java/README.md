@@ -42,6 +42,13 @@ implementation 'org.hyperledger.fabric:fabric-gateway:1.1.0'
 注意，这里所有路径都是本地路径
 ![image](https://user-images.githubusercontent.com/101753393/233925944-8c6ffe50-120e-480c-b703-c0358f47abb2.png)
 
+## 启动application
+```bash
+# To run the Java sample application
+cd application-gateway-java
+./gradlew run
+```
+
 ## Gateway-client api java
 
 所有package和method可以在[此处](https://hyperledger.github.io/fabric-gateway/main/api/java/)找到
