@@ -6,9 +6,13 @@
 2. 环境变量 (docker-compose)
 3. 配置文件(core) - 必须存在，不然会报错
 
+[具体peer配置解析翻译](https://blog.csdn.net/weixin_45839894/article/details/123450112)
+
 不论哪种方式，我们都需要注意改写以下的几个值
 
 ![Untitled (9)](https://user-images.githubusercontent.com/101753393/233886147-143e8c48-441d-41cb-a91b-e27c26a96d84.png)
+
+
 
 ## orderer节点
 同样，当Orderer节点启动时，会按照以下优先级从高到低的顺序依次尝试从中读取配置信息
