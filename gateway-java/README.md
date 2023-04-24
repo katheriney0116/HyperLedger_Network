@@ -6,7 +6,15 @@ Fabric-gateway是一个提供给我们与fabric网络交互的SDK，以java来�
 
 在2.4版本后，Fabric提倡使用[Fabric Gateway Client API](https://hyperledger.github.io/fabric-gateway/)，实现用最少的代码与链码交互
 
-更详细资料，见[此处](https://github.com/katheriney0116/HyperLedger_Network/blob/main/gateway-java/HyperLedger%20Fabric%20API.pdf)
+### 流程
+
+1. 配置钱包
+2. 配置gateway
+3. 获取网络
+4. 获取合约
+5. 调用合约
+
+  更详细资料，见[此处](https://github.com/katheriney0116/HyperLedger_Network/blob/main/gateway-java/HyperLedger%20Fabric%20API.pdf)
 
 ## 配置
 
