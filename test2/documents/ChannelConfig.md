@@ -25,8 +25,11 @@
 文件中有以下配置我们是需要进行设置的
 ![Untitled (5)](https://user-images.githubusercontent.com/101753393/233882182-211258f3-36bf-45db-83c1-f74466f2d88e.png)
 
-具体配置请看
+本实验具体配置请看
 [configtx.yaml](https://github.com/katheriney0116/HyperLedger_Network/blob/main/test2/config/configtx.yaml)
+
+翻译请看
+[configtx.yaml翻译](https://blog.csdn.net/wj8023/article/details/127126703)
 
 当编辑完此文件后，我们可以执行以下命令来创建新的创世区块和通道名称.
 
