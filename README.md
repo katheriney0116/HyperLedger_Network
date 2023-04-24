@@ -58,7 +58,7 @@
 
  - [Fabric-Gateway学习](https://github.com/katheriney0116/HyperLedger_Network/tree/main/gateway-java)
 
- - Fabric-Explorer学习
+ - [Fabric-Explorer学习](https://github.com/katheriney0116/HyperLedger_Network/tree/main/explorer)
 
  ## Folders Description
  ```bash
