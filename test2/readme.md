@@ -90,6 +90,27 @@ Fabric节点在启动时会通过几种方式加载变量获取配置信息
 - [安装链码到指定通道](https://github.com/katheriney0116/HyperLedger_Network/blob/main/test2/documents/InstallChaincode.md)
 - [更新链码步骤](https://github.com/katheriney0116/HyperLedger_Network/blob/main/test2/documents/UpdateChaincode.md)
 
+## CouchDB(数据库浏览器）
+
+因为我们在定义peer节点的时候，添加了couchDB的环境变量，我们可以用couchDB的浏览器去查看我们之前启动智能合约时写入的数据（具体couchdb的container已经在上面部署节点的时候启动了）
+
+具体流程可参考[此文章](https://ifantasy.net/2022/08/24/hyperledger_fabric_10_complex_contract_and_couchdb//)
+
+![image](https://user-images.githubusercontent.com/101753393/233954996-0f4f2729-28f9-4efc-b33d-697740454610.png)
+
+在本地浏览器输入`http://10.10.10.124:7255/_utils/#login`
+
+![image](https://user-images.githubusercontent.com/101753393/233955624-90243acd-b563-418e-9669-23ab6810c2af.png)
+
+![image](https://user-images.githubusercontent.com/101753393/233955768-b8e3a117-33ab-4b3f-ae89-fbd8f43df5cb.png)
+
+![image](https://user-images.githubusercontent.com/101753393/233955822-69b12ab3-a60b-4cc3-bc9b-5ad292c9eecc.png)
+
+![image](https://user-images.githubusercontent.com/101753393/233955854-7b6290f2-3894-4c61-85d5-21465c1de2a9.png)
+
+
+
+
 ## works cited
 
 https://github.com/wefantasy/FabricLearn
