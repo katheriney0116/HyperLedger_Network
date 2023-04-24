@@ -25,3 +25,23 @@
 在此文章里，我们用123虚拟机生成所有证书文件
 
 然后使用`docker stop $(docker ps -aq)`关掉CA服务容器
+
+## 部署节点
+
+Fabric节点在启动时会通过几种方式加载变量获取配置信息
+
+默认情况下，Fabric节点主配置路径为 `FABRIC_CFG_PATH` 环境变量所指向路径。在不显式指定配置路径时，会尝试从主配置路径下查找相关的配置文件。
+
+![image](https://user-images.githubusercontent.com/101753393/233884903-f05fca62-7cd6-4ab7-9813-4868ac2b703c.png)
+
+所以，在启动docker之前，我们一定要先去定义`FABRIC_CFG_PATH`的环境变量，不然启动节点时会报错
+
+在本实验中，我们设定的path是`export FABRIC_CFG_PATH=/root/test2/config`，里面包含了以下所有的配置文件
+
+- core.yaml (peer）
+- orderer.yaml(orderer)
+- configtx.yaml (channel)
+
+根据此文档，我们可依次启动Peer节点和Orderer节点
+
+[部署peer和orderer节点](https://github.com/katheriney0116/HyperLedger_Network/blob/main/test2/documents/SetupNode.md)
