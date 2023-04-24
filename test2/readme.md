@@ -48,9 +48,9 @@ Fabric节点在启动时会通过几种方式加载变量获取配置信息
 
 ## 创造通道
 
-虽然我们已经启动了所有的节点，目前的节点都没有加入任何通道，我们首先要[创造通道的创世区块并将orderer节点加入通道](https://github.com/katheriney0116/HyperLedger_Network/blob/main/test2/documents/ChannelConfig.md)
+- [创造通道的创世区块并将orderer节点加入通道](https://github.com/katheriney0116/HyperLedger_Network/blob/main/test2/documents/ChannelConfig.md)
 
-其次，我们要将[peer节点加入通道](https://github.com/katheriney0116/HyperLedger_Network/blob/main/test2/documents/PeerJoinChannel.md)
+- [peer节点加入通道](https://github.com/katheriney0116/HyperLedger_Network/blob/main/test2/documents/PeerJoinChannel.md)
 
 到此为止，所有节点都已加入通道，并可使用
 
