@@ -53,3 +53,8 @@ Fabric节点在启动时会通过几种方式加载变量获取配置信息
 其次，我们要将[peer节点加入通道](https://github.com/katheriney0116/HyperLedger_Network/blob/main/test2/documents/PeerJoinChannel.md)
 
 到此为止，所有节点都已加入通道，并可使用
+
+## 链码（智能合约）
+
+- [安装链码到指定通道]
+- [更新链码步骤]
